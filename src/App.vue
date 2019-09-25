@@ -1,11 +1,13 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline" height="64">
-          <span class="font-weight-light">
-            My<span class="font-weight-regular text-uppercase font-normal">Weekly</span>
-          </span>
-      </v-toolbar-title>
+      <router-link to="/">
+        <v-toolbar-title class="headline" height="64">
+            <span class="font-weight-light">
+              My<span class="font-weight-regular text-uppercase font-normal">Weekly</span>
+            </span>
+        </v-toolbar-title>
+      </router-link>
 
       <v-spacer></v-spacer>
 
@@ -21,21 +23,22 @@
 </template>
 
 <script>
-import AddArticlePopup from "@/components/AddArticlePopup";
+import AddArticlePopup from '@/components/AddArticlePopup';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    AddArticlePopup
+    AddArticlePopup,
   },
   data() {
 	  return {
 
-	  }
+	  };
   },
 };
 </script>
 
 
 <style lang="scss" scoped>
+
 </style>
