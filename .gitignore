@@ -1,4 +1,4 @@
-DS_Store
+.DS_Store
 node_modules
 /dist
 
@@ -6,7 +6,6 @@ node_modules
 /tests/e2e/screenshots/
 
 # local env files
-.env
 .env.local
 .env.*.local
 
