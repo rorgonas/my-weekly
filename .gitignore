@@ -6,6 +6,7 @@ node_modules
 /tests/e2e/screenshots/
 
 # local env files
+.env
 .env.local
 .env.*.local
 
@@ -27,3 +28,6 @@ yarn-error.log*
 /dist_electron
 
 .history/
+
+# Firebase config
+/src/firebase/config.js

@@ -25,7 +25,9 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">Login</v-btn>
+          <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">
+            Login
+          </v-btn>
 
           <v-btn text router to="/signup" class="ml-0 mt-0 text-capitalize">
             <span>You need an account?</span>
