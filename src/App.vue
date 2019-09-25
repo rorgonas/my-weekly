@@ -11,9 +11,16 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn text router to="/login">
-        <span class="mr-2">Login</span>
-      </v-btn>
+      <div v-if="!isAuthenticated">
+        <v-btn text router to="/login">
+          <span class="mr-2">Login</span>
+        </v-btn>
+      </div>
+      <div v-else>
+        <v-btn @click="logout">
+          <span class="mr-2">Logout</span>
+        </v-btn>
+      </div>
     </v-app-bar>
 
     <v-content class="ma-4">
@@ -34,6 +41,16 @@ export default {
 	  return {
 
 	  };
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('userSignOut');
+    },
   },
 };
 </script>

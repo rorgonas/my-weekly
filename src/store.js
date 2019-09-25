@@ -26,12 +26,12 @@ export default new Vuex.Store({
         .then((user) => {
           commit('SET_USER', user);
           commit('SET_IS_AUTHENTICATED', true);
-          router.push('/about');
+          router.push('/');
         })
         .catch(() => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/');
+          router.push('/login');
         });
     },
     userJoin({ commit }, { email, password }) {
@@ -41,12 +41,12 @@ export default new Vuex.Store({
         .then((user) => {
           commit('SET_USER', user);
           commit('SET_IS_AUTHENTICATED', true);
-          router.push('/about');
+          router.push('/');
         })
         .catch(() => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/');
+          router.push('/signup');
         });
     },
     userSignOut({ commit }) {

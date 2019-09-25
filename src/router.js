@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ListIssues from './views/ListIssues';
-import Login from './views/Login';
-import Signup from './views/Signup';
-import Issue from './views/Issue';
+import ListIssues from './views/ListIssues.vue';
+import Login from './views/Login.vue';
+import Signup from './views/Signup.vue';
+import Issue from './views/Issue.vue';
 
 Vue.use(Router);
 
