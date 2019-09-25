@@ -7,8 +7,8 @@
       </v-card-title>
       <v-card-text>
         <v-form class="px-3" ref="form">
-          <v-text-field v-model="title" label="Title" :rules="inputRules"></v-text-field>
-          <v-textarea v-model="content" label="Information" :rules="inputRules"></v-textarea>
+          <v-text-field v-model="title" label="Title" prepend-icon="folder" :rules="inputRules"></v-text-field>
+          <v-textarea v-model="url" label="Information" prepend-icon="edit" :rules="inputRules"></v-textarea>
 
           <v-menu v-model="menu" :close-on-content-click="false">
             <v-text-field slot="activator" :rules="inputRules"

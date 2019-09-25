@@ -40,7 +40,6 @@ export default {
         v => v.length >= 3 || "Minimum length is 3 characters"
       ],
       loading: false,
-      dialog: false
     };
   }
 };

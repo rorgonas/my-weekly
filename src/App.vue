@@ -25,7 +25,6 @@ import AddArticlePopup from "@/components/AddArticlePopup";
 
 export default {
   name: "App",
-
   components: {
     AddArticlePopup
   },
@@ -33,7 +32,7 @@ export default {
 	  return {
 
 	  }
-  }
+  },
 };
 </script>
 

@@ -27,6 +27,6 @@ export default new Router({
       path: '/issue:id',
       name: 'issue',
       component: Issue,
-    }
+    },
   ],
 });
