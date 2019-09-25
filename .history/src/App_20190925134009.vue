@@ -2,9 +2,12 @@
   <v-app>
     <v-app-bar app>
       <v-toolbar-title class="headline" height="64">
-          <span class="font-weight-light">
-            My<span class="font-weight-regular text-uppercase font-normal">Weekly</span>
-          </span>
+        <a text router to="/" class="logo">
+          <h1 class="font-weight-light">
+            My
+            <span class="font-weight-regular text-uppercase">Weekly</span>
+          </h1>
+        </a>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -14,7 +17,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-content class="ma-4">
+    <v-content class="mx-4 mb-4">
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -31,7 +34,7 @@ export default {
   },
   data() {
 	  return {
-
+		  
 	  }
   }
 };

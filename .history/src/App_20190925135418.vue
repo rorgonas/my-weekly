@@ -14,7 +14,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-content class="ma-4">
+    <v-content class="mx-4 mb-4">
       <router-view></router-view>
     </v-content>
   </v-app>

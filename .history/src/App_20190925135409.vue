@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app>
       <v-toolbar-title class="headline" height="64">
-          <span class="font-weight-light">
+          <span class="font-weight-light font-italic">
             My<span class="font-weight-regular text-uppercase font-normal">Weekly</span>
           </span>
       </v-toolbar-title>
@@ -14,7 +14,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-content class="ma-4">
+    <v-content class="mx-4 mb-4">
       <router-view></router-view>
     </v-content>
   </v-app>

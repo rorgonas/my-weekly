@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ListIssues from './views/ListIssues';
+import ListIssue from './views/ListIssue';
 import Login from './views/Login';
 import Signup from './views/Signup';
 import Issue from './views/Issue';
