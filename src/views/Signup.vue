@@ -32,16 +32,16 @@
 export default {
   data() {
     return {
-      name: "",
-      password: "",
+      name: '',
+      password: '',
       show: false,
       inputRules: [
-        v => !!v || "This field is required",
-        v => v.length >= 3 || "Minimum length is 3 characters"
+        v => !!v || 'This field is required',
+        v => v.length >= 3 || 'Minimum length is 3 characters',
       ],
       loading: false,
     };
-  }
+  },
 };
 </script>
 

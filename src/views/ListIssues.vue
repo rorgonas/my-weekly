@@ -6,10 +6,10 @@
 
 <script>
 export default {
-	components: {
-		
-	}
-}
+  components: {
+
+  },
+};
 </script>
 
 <style lang="scss" scoped>
