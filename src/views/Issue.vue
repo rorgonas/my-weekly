@@ -78,7 +78,7 @@
 				  <v-list-item v-for="article in issue.articles" :key="article.id">
 					<v-list-item-content>
 					{{ article.title }}<br>
-					{{ article.url }}
+            <a :href="article.url" target="_blank">{{ article.url }}</a>
 					</v-list-item-content>
 				</v-list-item>
 			  </v-list>
