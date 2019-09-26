@@ -1,16 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
+import '@/firebase/';
 import router from '@/router';
 
 Vue.use(Vuex);
+
+const db = firebase.firestore();
 
 export default new Vuex.Store({
   state: {
     user: null,
     isAuthenticated: false,
     articles: [],
-    issues: []
+    issues: [],
   },
   mutations: {
     SET_USER(state, payload) {
@@ -19,15 +22,15 @@ export default new Vuex.Store({
     SET_IS_AUTHENTICATED(state, payload) {
       state.isAuthenticated = payload;
     },
-    ADD_ARTICLE(state, payload){
+    ADD_ARTICLE(state, payload) {
       state.articles.push(payload);
     },
     ADD_ISSUE(state, payload) {
       state.issues.push(payload);
     },
-    CLEAR_ARTICLES(state){
+    CLEAR_ARTICLES(state) {
       state.articles = [];
-    }
+    },
   },
   actions: {
     userLogin({ commit }, { email, password }) {
@@ -84,10 +87,10 @@ export default new Vuex.Store({
           });
         });
     },
-    addArticle({ commit }, data){
+    addArticle({ commit }, data) {
       commit('ADD_ARTICLE', data);
     },
-    createIssue({ commit }, data){
+    createIssue({ commit }, data) {
       // Save to firebase()
 
       // db.collection('projects').add(project).then(() => {
@@ -96,9 +99,26 @@ export default new Vuex.Store({
       //   this.$emit('projectAdded');
       // });
 
-      commit('ADD_ISSUE', data);
-      commit('CLEAR_ARTICLES');
-      router.push('/issues');
+      const issueName = data.name;
+      db.collection('issues').doc(issueName).set({
+        name: issueName,
+        articles: data.articles,
+      })
+        .then(() => {
+          this._vm.$toast.open({
+            message: 'Document successfully written!',
+            type: 'success',
+          });
+          commit('ADD_ISSUE', data);
+          commit('CLEAR_ARTICLES');
+          router.push('/issues');
+        })
+        .catch((error) => {
+          this._vm.$toast.open({
+            message: `Error writing document: ${error.message}`,
+            type: 'success',
+          });
+        });
     },
   },
   getters: {
@@ -110,6 +130,6 @@ export default new Vuex.Store({
     },
     getIssues(state) {
       return state.issues;
-    }
+    },
   },
 });

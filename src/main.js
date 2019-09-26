@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueToast from 'vue-toast-notification';
-import 'vue-toast-notification/dist/index.css'
+import 'vue-toast-notification/dist/index.css';
 import App from './App.vue';
 import router from './router';
 import store from './store';

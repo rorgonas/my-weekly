@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import env from './config';
 
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: env.CONFIG.VUE_APP_API_KEY,
