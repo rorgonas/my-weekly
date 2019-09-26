@@ -10,10 +10,8 @@
     <h1>Issues</h1>
     <v-list-item v-for="(issue, index) in issues" :key="issue.id">
       <v-list-item-content>
-        <v-list-item-title>
-          <router-link :to="`/issue/${index}`">
-            {{ issue.title }} {{ issue.publishedDate }}
-          </router-link>
+        <v-list-item-title @click="onSelectIssue(index)">
+          {{ issue.title }} {{ issue.publishedDate }}
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -48,9 +46,15 @@ export default {
     getIssues() {
       return this.$store.dispatch('getIssues');
     },
+    onSelectIssue(id) {
+      router.push(`/issue/${id}`);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+  .v-list-item__title {
+    cursor: pointer;
+  }
 </style>
