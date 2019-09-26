@@ -4,6 +4,7 @@ import ListIssues from './views/ListIssues.vue';
 import Login from './views/Login.vue';
 import Signup from './views/Signup.vue';
 import Issue from './views/Issue.vue';
+import About from './views/About.vue';
 
 Vue.use(Router);
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/issues',
       name: 'issue',
       component: ListIssues,
-    },
+	},
+	{
+		path: '/about',
+		name: 'about',
+		component: About,
+	  },
   ],
 });

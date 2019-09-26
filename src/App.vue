@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar app class="primary white--text">
+    <v-app-bar app class="primary" height="72">
       <router-link to="/">
-        <v-toolbar-title class="headline" height="64">
-            <span class="font-weight-light">
+        <v-toolbar-title class="subheading">
+            <span class="font-weight-light white--text">
               My<span class="font-weight-regular text-uppercase font-normal">Weekly</span>
             </span>
         </v-toolbar-title>

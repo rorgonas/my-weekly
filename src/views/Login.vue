@@ -1,5 +1,5 @@
 <template>
-  <div class="login mt-5">
+  <div class="login mt-2">
     <h1 class="subheading grey--text font-weight-light">
 		<v-icon>account-circle</v-icon>
 		Login
@@ -10,7 +10,7 @@
         <v-card-text>
           <v-form class="px-3" ref="form" v-model="valid">
             <v-text-field
-              prepend-icon="person"
+              prepend-icon="email"
               v-model="email"
               label="Email"
               :rules="emailRules"
@@ -28,11 +28,9 @@
           </v-form>
         </v-card-text>
         <v-card-actions class="justify-space-between">
-          <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">
-            Login
-          </v-btn>
+		<v-btn text router to="/sigup" class="ml-3 mt-0 text-capitalize">
             <span>You need an account?</span>
-          </v-btn>
+          </v-btn>	
 		  <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">Login</v-btn>
         </v-card-actions>
       </v-card>

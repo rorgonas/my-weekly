@@ -1,5 +1,5 @@
 <template>
-  <div class="signup">
+  <div class="signup mt-2">
     <h1 class="subheading grey--text font-weight-light">Sign up</h1>
 
     <v-container class="my-5">
@@ -25,9 +25,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions class="justify-space-between">
-            Signup
-          </v-btn>
-          <v-btn text router to="/login" class="ml-0 mt-0 text-capitalize">
+          <v-btn text router to="/login" class="ml-3 mt-0 text-capitalize">
             <span>You already have an account?</span>
           </v-btn>
 
