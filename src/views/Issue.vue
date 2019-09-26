@@ -74,7 +74,7 @@
       <v-container class="my-5">
           <h2 class="grey--text font-weight-light">Articles</h2>
 		  <v-card flat class="pl-2">
-			  <v-list v-show="getArticles.length !== 0">
+			  <v-list>
 				  <v-list-item v-for="article in issue.articles" :key="article.id">
 					<v-list-item-content>
 					{{ article.title }}<br>
