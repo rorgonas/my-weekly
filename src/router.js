@@ -31,7 +31,7 @@ export default new Router({
     },
     {
       path: '/issues',
-      name: 'issue',
+      name: 'issues',
       component: ListIssues,
     },
     {

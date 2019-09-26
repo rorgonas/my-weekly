@@ -1,85 +1,106 @@
 <template>
-  <div class="issue-item">
-    <nav v-if="isAuthenticated">
-
-    </nav>
-    <header v-if="isEditMode">
-      <h1>Edit Issue</h1>
-    </header>
-    <header v-else>
-      <h1>Create New Issue</h1>
-      <aside>
-        <v-btn @click="onCreate">
-          <span class="mr-2">Create</span>
-        </v-btn>
-      </aside>
+  <div class="issue-item mt-2">
+	<v-layout>
+		<v-flex xs12 md6>
+			<h1 class="subheading grey--text font-weight-light ml-5">Create New Issue</h1>
+		</v-flex>
+		<v-flex xs12 md6>
+			<div class="flex-row">
+				<v-btn large class="ml-auto d-block" color="primary" @click="onCreate">
+					<v-icon>save_alt</v-icon>
+					<span class="mx-2">Save This Issue</span>
+				</v-btn>
+			</div>
+		</v-flex>
+	</v-layout>
+    
+    <v-container class="my-5">
+      
       <v-card-text>
         <v-form ref="form" v-model="valid">
-        <v-text-field
-          v-model="name"
-          label="Name*"
-          :rules="nameRules"
-          required
-        ></v-text-field>
+          <v-layout>
+            <v-flex xs12>
+              <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                max-width="290px"
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    :value="publishDate"
+                    label="Pick a Publish Date"
+                    prepend-icon="event"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="publishDate" no-title @input="menu = false"></v-date-picker>
+              </v-menu>
+            </v-flex>
+          </v-layout>
         </v-form>
-        </v-card-text>
+      </v-card-text>
       <article>
         <AddArticlePopup></AddArticlePopup>
-        <h3>Articles</h3>
-        <v-list-item v-for="article in articleList"
-                     :key="article.id">
+        <h2 class="grey--text font-weight-light">Articles</h2>
+        <v-list-item v-for="article in articleList" :key="article.id">
           <v-list-item-content>
             <v-list-item-title v-text="article.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </article>
-    </header>
+    </v-container>
   </div>
 </template>
 
 <script>
-import AddArticlePopup from '@/components/AddArticlePopup';
+import format from "date-fns/format";
+import AddArticlePopup from "@/components/AddArticlePopup";
 
 export default {
   data() {
     return {
       valid: false,
-      name: '',
+      name: "",
+      menu: false,
       articles: [],
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length < 20
-            || 'Name should be less then 20 characters',
-      ],
+      publishDate: null,
+      dateRules: [v => !!v || "Date is required"]
     };
   },
   components: {
-    AddArticlePopup,
+    AddArticlePopup
   },
   computed: {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
     isEditMode() {
-      return !!(this.$route.params.id !== '0');
+      return !!(this.$route.params.id !== "0");
     },
     articleList() {
       return this.$store.getters.getArticles;
     },
+    formattedDate() {
+      console.log(this.publishDate);
+      return this.publishDate ? format(this.publishDate, "MMMM do YYYY") : "";
+    }
   },
   methods: {
     onCreate() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch('createIssue', {
+        this.$store.dispatch("createIssue", {
           name: this.name,
-          articles: this.$store.getters.getArticles,
+          articles: this.$store.getters.getArticles
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>

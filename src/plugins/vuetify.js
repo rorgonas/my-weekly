@@ -11,11 +11,11 @@ export default new Vuetify({
   },
   theme: {
     themes: {
-		light: {
-			primary: '#ff4081',
-			  success: '#8cc34b',
-			  accent: '#2196F3'
-		},
-	},
+      light: {
+        primary: '#ff4081',
+        success: '#8cc34b',
+        accent: '#2196F3',
+      },
+    },
   },
 });

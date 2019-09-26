@@ -66,7 +66,7 @@ const mainMenuTemplate = [
     label: 'Help',
     submenu: [
       {
-        label: 'Electron Learn More',
+        label: 'Learn Electron',
         click() {
           require('electron').shell.openExternal('http://electron.atom.io');
         },
@@ -187,7 +187,7 @@ if (process.platform === 'darwin') {
     label: name,
     submenu: [
       {
-        label: 'About MyWeekly App',
+        label: 'About MyWeekly',
         click() {
           aboutWin.show();
         },

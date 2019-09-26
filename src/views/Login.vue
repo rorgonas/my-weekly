@@ -1,6 +1,6 @@
 <template>
   <div class="login mt-2">
-    <h1 class="subheading grey--text font-weight-light">
+    <h1 class="subheading grey--text font-weight-light ml-5">
 		<v-icon>account-circle</v-icon>
 		Login
 		</h1>
@@ -23,6 +23,7 @@
               type="password"
               label="Password"
               required
+			  counter
               @click:append="show = !show"
             ></v-text-field>
           </v-form>
@@ -31,7 +32,7 @@
 		<v-btn text router to="/signup" class="ml-3 mt-0 text-capitalize">
             <span>You need an account?</span>
           </v-btn>
-		  <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">Login</v-btn>
+		  <v-btn text @click="submit" class="accent ma-3 text-capitalize" :loading="loading">Login</v-btn>
         </v-card-actions>
       </v-card>
     </v-container>

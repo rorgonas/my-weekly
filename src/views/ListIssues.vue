@@ -1,13 +1,15 @@
 <template>
   <div class="list-issues">
-    <nav v-if="isAuthenticated">
-      <v-btn @click="onCreate">
-        <span class="mr-2">Create New</span>
+    <nav v-if="isAuthenticated" class="flex-row">
+      <v-btn text right class="ml-auto d-block" @click="onCreate">
+		  <v-icon>playlist_add</v-icon>
+        <span class="mr-2">Create New Issue</span>
       </v-btn>
-      <v-btn @click="onEdit">
+      <!-- <v-btn @click="onEdit">
         <span class="mr-2">Edit</span>
-      </v-btn>
+      </v-btn> -->
     </nav>
+
     <h1>Issues</h1>
     <v-list-item v-for="issue in issueList" :key="issue.id">
       <v-list-item-content>

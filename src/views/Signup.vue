@@ -1,13 +1,13 @@
 <template>
   <div class="signup mt-2">
-    <h1 class="subheading grey--text font-weight-light">Sign up</h1>
+    <h1 class="subheading grey--text font-weight-light ml-5">Sign up</h1>
 
     <v-container class="my-5">
       <v-card flat>
         <v-card-text>
           <v-form class="px-3" ref="form" v-model="valid">
             <v-text-field
-              prepend-icon="person"
+              prepend-icon="email"
               v-model="email"
               label="Email"
               :rules="emailRules"
@@ -19,6 +19,7 @@
               :rules="passwordRules"
               type="password"
               label="Password"
+			  counter
               @click:append="show = !show"
               required
             ></v-text-field>
