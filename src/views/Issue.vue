@@ -45,15 +45,20 @@
           </v-layout>
         </v-form>
       </v-card-text>
+
       <article>
-        <AddArticlePopup></AddArticlePopup>
-        <h2 class="grey--text font-weight-light">Articles</h2>
+        <AddArticlePopup/>
+
+		<v-divider class="my-5"></v-divider>
+
+		<h2 class="grey--text font-weight-light">CSS/HTML</h2>
         <v-list-item v-for="article in getArticleList" :key="article.id">
           <v-list-item-content>
             <v-list-item-title v-text="article.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </article>
+
     </v-container>
   </div>
 </template>
@@ -70,7 +75,7 @@ export default {
       menu: false,
       articles: [],
       publishDate: null,
-      dateRules: [v => !!v || 'Date is required'],
+      dateRules: [v => !!v || "Date is required"],
       issueNumber: 0,
     };
   },
@@ -101,8 +106,8 @@ export default {
     onCreate() {
       // @todo: get publishedDate from Calendar widget
       if (this.$refs.form.validate()) {
-        this.setCurrentIssueNameNumber();
-        this.$store.dispatch('createIssue', {
+		this.setCurrentIssueNameNumber();
+        this.$store.dispatch("createIssue", {
           number: this.issueNumber,
           title: `WEEKLY READING LIST ${this.issueNumber}`,
           publishedDate: 'September 19, 2019',
