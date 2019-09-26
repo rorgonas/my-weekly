@@ -22,7 +22,7 @@ const mainMenuTemplate = [
         label: 'Issues List',
         accelerator: process.platform === 'darwin' ? 'Command+L' : 'Ctrl+L',
         click() {
-          // routeToIssueList();
+          win.loadURL(process.env.WEBPACK_DEV_SERVER_URL + '#/issues');
         },
       },
       {
