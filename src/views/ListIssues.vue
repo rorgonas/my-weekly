@@ -8,10 +8,12 @@
     </nav>
 
     <h1>Issues</h1>
-    <v-list-item v-for="issue in issues" :key="issue.id">
+    <v-list-item v-for="(issue, index) in issues" :key="issue.id">
       <v-list-item-content>
         <v-list-item-title>
-          {{ issue.title }} {{ issue.publishedDate }}
+          <router-link :to="`/issue/${index}`">
+            {{ issue.title }} {{ issue.publishedDate }}
+          </router-link>
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -41,7 +43,7 @@ export default {
   },
   methods: {
     onCreate() {
-      router.push('/issue/0');
+      router.push('/issue/new');
     },
     getIssues() {
       return this.$store.dispatch('getIssues');

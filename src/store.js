@@ -122,8 +122,6 @@ export default new Vuex.Store({
       let items = [];
       db.collection('issues').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          // commit('ADD_ISSUE', doc);
-          console.log(`${doc.id} => ${doc.data()}`);
           items.push(doc.data());
         });
 

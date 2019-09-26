@@ -57,7 +57,7 @@ export default {
       ],
       urlRules: [
         v => !!v || 'URL is required',
-      ]
+      ],
     };
   },
   methods: {
@@ -68,7 +68,7 @@ export default {
           title: this.title,
           url: this.url,
           category: this.selectedItem,
-        })
+        });
       }
     },
   },
