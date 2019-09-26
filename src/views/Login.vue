@@ -28,9 +28,9 @@
           </v-form>
         </v-card-text>
         <v-card-actions class="justify-space-between">
-		<v-btn text router to="/sigup" class="ml-3 mt-0 text-capitalize">
+		<v-btn text router to="/signup" class="ml-3 mt-0 text-capitalize">
             <span>You need an account?</span>
-          </v-btn>	
+          </v-btn>
 		  <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">Login</v-btn>
         </v-card-actions>
       </v-card>
