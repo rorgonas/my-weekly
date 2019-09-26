@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     isAuthenticated: false,
+    canSave: false,
     articles: [],
     issues: [],
   },
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     },
     ADD_ARTICLE(state, payload) {
       state.articles.push(payload);
+      state.canSave = true;
     },
     ADD_ISSUE(state, payload) {
       state.issues.push(payload);
@@ -174,6 +176,9 @@ export default new Vuex.Store({
     },
     getIssues(state) {
       return state.issues;
+    },
+    getSaveBtnStatus(state) {
+      return state.canSave;
     },
   },
 });

@@ -7,7 +7,7 @@
         </v-flex>
         <v-flex xs12 md6>
           <div class="flex-row">
-            <v-btn large class="ml-auto d-block" color="primary" @click="onCreate">
+            <v-btn large class="ml-auto d-block" color="primary" @click="onCreate" :disabled="!isSaveBtnEnables">
               <v-icon>save_alt</v-icon>
               <span class="mx-2">Save This Issue</span>
             </v-btn>
@@ -67,14 +67,14 @@
     <div v-else>
       <v-layout>
         <v-flex xs12>
-          <h1 class="subheading grey--text font-weight-light ml-5">{{ issue.title }} {{ issue.publishedDate}}</h1>
+          <h1 class="subheading grey--text font-weight-light ml-5">{{ issue.title }} {{ issue.publishDate}}</h1>
         </v-flex>
       </v-layout>
 
       <v-container class="my-5">
           <h2 class="grey--text font-weight-light">Articles</h2>
 		  <v-card flat class="pl-2">
-			  <v-list>
+			  <v-list v-show="getArticles.length !== 0">
 				  <v-list-item v-for="article in issue.articles" :key="article.id">
 					<v-list-item-content>
 					{{ article.title }}<br>
@@ -105,10 +105,10 @@ export default {
       publishDate: null,
       dateRules: [v => !!v || 'Date is required'],
       issueNumber: 0,
-	  issue: [],
-	  cssArticles: [],
-	  jsArticles: [],
-	  miscArticles: []
+      issue: [],
+      cssArticles: [],
+      jsArticles: [],
+      miscArticles: [],
     };
   },
   components: {
@@ -128,10 +128,15 @@ export default {
       const date = this.publishDate ? this.publishDate : new Date();
       return moment(date).format('MMMM Do YYYY');
     },
+    isSaveBtnEnables() {
+      return this.$store.getters.getSaveBtnStatus;
+    },
   },
   mounted() {
-	this.issue = this.getSelectedIssue();
-	console.log(this.issue.articles)
+    if (!this.isEditMode) {
+      this.issue = this.getSelectedIssue();
+    }
+    this.articles = this.$store.getters.getArticles;
   },
   methods: {
     getSelectedIssue() {
@@ -146,13 +151,13 @@ export default {
       this.issueNumber = `#${idx}`;
     },
     onCreate() {
-      // @todo: get publishedDate from Calendar widget
       if (this.$refs.form.validate()) {
         this.setCurrentIssueNameNumber();
         this.$store.dispatch('createIssue', {
           number: this.issueNumber,
           title: `${this.issueNumber} WEEKLY READING LIST`,
           publishDate: this.formattedDate,
+          articles: this.articles,
         });
       }
     },

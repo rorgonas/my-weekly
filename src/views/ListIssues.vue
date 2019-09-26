@@ -16,11 +16,11 @@
 
 	<v-container class="my-5">
 		<v-card flat class="pl-2">
-			<v-list>
+			<v-list v-show="issues.length !== 0">
 				<v-list-item v-for="(issue, index) in issues" :key="index">
 					<v-list-item-content>
 						<v-list-item-title @click="onSelectIssue(index)">
-							<span class="ml-1">{{ issue.title }}</span> <span class="publish-date">{{ issue.publishedDate }}</span>
+							<span class="ml-1">{{ issue.title }}</span> <span class="publish-date">{{ issue.publishDate }}</span>
 						</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
