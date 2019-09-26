@@ -6,7 +6,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">User Profile</span>
+          <span class="headline">Article</span>
         </v-card-title>
         <v-card-text>
           <v-form class="px-3" ref="form" v-model="valid">
@@ -46,9 +46,9 @@ export default {
       title: '',
       url: '',
       categories: [
-        { text: 'CSS', value: 'CSS/HTML' },
-        { text: 'JS', value: 'JS' },
-        { text: 'MISC', value: 'MISC' }
+        { text: 'CSS/HTML', value: '1' },
+        { text: 'JavaScript and Beyond', value: '2' },
+        { text: 'MISC.', value: '3' },
       ],
       selectedItem: [],
       dialog: false,
@@ -67,7 +67,7 @@ export default {
         this.$store.dispatch('addArticle', {
           title: this.title,
           url: this.url,
-          types: this.selectedItem,
+          category: this.selectedItem,
         })
       }
     },
