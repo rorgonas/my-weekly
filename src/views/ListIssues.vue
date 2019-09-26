@@ -7,14 +7,20 @@
       </v-btn>
     </nav>
 
-    <h1>Issues</h1>
-    <v-list-item v-for="(issue, index) in issues" :key="issue.id">
-      <v-list-item-content>
-        <v-list-item-title @click="onSelectIssue(index)">
-          {{ issue.title }} {{ issue.publishedDate }}
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
+	<v-container class="my-5">
+		<v-card flat class="pl-2">
+			<v-list>
+				<v-list-item v-for="(issue, index) in issues" :key="index">
+					<v-list-item-content>
+						<v-list-item-title @click="onSelectIssue(index)">
+							<span class="ml-1">{{ issue.title }}</span> <span class="publish-date">{{ issue.publishedDate }}</span>
+						</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+			</v-list>
+		</v-card>
+	</v-container>
+
   </div>
 </template>
 
@@ -54,6 +60,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .publish-date {
+      font-size: 13px;
+      font-weight: 700;
+      margin-left: 12px;
+      color: #000;
+  }
   .v-list-item__title {
     cursor: pointer;
   }

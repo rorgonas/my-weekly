@@ -15,7 +15,7 @@
         </v-flex>
       </v-layout>
       <v-container class="my-5">
-
+      <v-card flat>
         <v-card-text>
           <v-form ref="form" v-model="valid">
             <v-layout>
@@ -45,15 +45,20 @@
             </v-layout>
           </v-form>
         </v-card-text>
-        <article>
-          <AddArticlePopup></AddArticlePopup>
+      </v-card>
+
+      <v-card flat>
+        <AddArticlePopup />
+          <v-divider class="my-5"></v-divider>
           <h2 class="grey--text font-weight-light">Articles</h2>
           <v-list-item v-for="article in getArticles" :key="article.id">
+
+        <h2 class="grey--text font-weight-light">CSS/HTML</h2>
             <v-list-item-content>
               <v-list-item-title v-text="article.title"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </article>
+      </v-card>
       </v-container>
     </div>
     <div v-else>
