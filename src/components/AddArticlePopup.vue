@@ -19,10 +19,11 @@
                   <v-text-field v-model="url" label="URL*" :rules="urlRules" required></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6">
-                  <v-select
-                    :items="types"
-                    label="Types"
-                  ></v-select>
+                  <v-select :items="categories"
+                            v-model="selectedItem"
+                            label="Select">
+                  </v-select>
+                  {{ selectedItems }}
                 </v-col>
               </v-row>
             </v-container>
@@ -45,7 +46,12 @@ export default {
       valid: false,
       title: '',
       url: '',
-      types: ['CSS', 'JS', 'MISC'],
+      categories: [
+        { text: 'CSS', value: 'CSS/HTML' },
+        { text: 'JS', value: 'JS' },
+        { text: 'MISC', value: 'MISC' }
+      ],
+      selectedItem: [],
       dialog: false,
       titleRules: [
         v => !!v || 'Title is required',
@@ -62,7 +68,7 @@ export default {
         this.$store.dispatch('addArticle', {
           title: this.title,
           url: this.url,
-          types: 'CSS',
+          types: this.selectedItem,
         })
       }
     },

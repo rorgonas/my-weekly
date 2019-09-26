@@ -9,16 +9,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     isAuthenticated: false,
-    articles: [{
-      title: 'test',
-      url: 'sdfs'
-    },{
-      title: 'test',
-      url: 'sdfs'
-    },{
-      title: 'test',
-      url: 'sdfs'
-    }],
+    articles: [],
     issues: []
   },
   mutations: {
@@ -33,6 +24,9 @@ export default new Vuex.Store({
     },
     ADD_ISSUE(state, payload) {
       state.issues.push(payload);
+    },
+    CLEAR_ARTICLES(state){
+      state.articles = [];
     }
   },
   actions: {
@@ -103,6 +97,7 @@ export default new Vuex.Store({
       // });
 
       commit('ADD_ISSUE', data);
+      commit('CLEAR_ARTICLES');
       router.push('/issues');
     },
   },
