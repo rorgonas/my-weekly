@@ -28,10 +28,13 @@ export default new Vuex.Store({
           commit('SET_IS_AUTHENTICATED', true);
           router.push('/');
         })
-        .catch(() => {
+        .catch((error) => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/login');
+          this._vm.$toast.open({
+            message: error.message,
+            type: 'error',
+          });
         });
     },
     userJoin({ commit }, { email, password }) {
@@ -43,10 +46,13 @@ export default new Vuex.Store({
           commit('SET_IS_AUTHENTICATED', true);
           router.push('/');
         })
-        .catch(() => {
+        .catch((error) => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/signup');
+          this._vm.$toast.open({
+            message: error.message,
+            type: 'error',
+          });
         });
     },
     userSignOut({ commit }) {
@@ -56,12 +62,15 @@ export default new Vuex.Store({
         .then(() => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/');
+          router.push('/login');
         })
-        .catch(() => {
+        .catch((error) => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/');
+          this._vm.$toast.open({
+            message: error.message,
+            type: 'error',
+          });
         });
     },
   },

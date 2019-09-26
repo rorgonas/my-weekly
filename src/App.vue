@@ -17,7 +17,7 @@
         </v-btn>
       </div>
       <div v-else>
-        <v-btn @click="logout">
+        <v-btn router to="/login" @click="logout">
           <span class="mr-2">Logout</span>
         </v-btn>
       </div>
