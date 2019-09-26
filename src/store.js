@@ -93,8 +93,17 @@ export default new Vuex.Store({
     addArticle({ commit }, data) {
       commit('ADD_ARTICLE', data);
     },
-    createIssue({ commit }, data) {
+    createIssue({ commit, state }, data) {
       const issue = `issue${data.number}`;
+
+      if (!state.isAuthenticated) {
+        this._vm.$toast.open({
+          message: 'Your no longer logged in',
+          type: 'warning',
+        });
+        router.push('/login');
+        return;
+      }
 
       db.collection('issues').doc(issue).set({
         number: data.number,
@@ -119,7 +128,18 @@ export default new Vuex.Store({
         });
     },
     getIssues({ commit, state }) {
-      let items = [];
+      const items = [];
+
+      // prevent serverside action if not logged in
+      if (!state.isAuthenticated) {
+        this._vm.$toast.open({
+          message: 'Your no longer logged in',
+          type: 'warning',
+        });
+        router.push('/login');
+        return;
+      }
+
       db.collection('issues').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           items.push(doc.data());
