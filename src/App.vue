@@ -1,11 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar app class="primary" height="72">
+    <v-app-bar app class="primary" height="72" v-if="$route.meta.header !== 1">
       <router-link to="/">
-        <v-toolbar-title class="subheading">
-            <span class="font-weight-light white--text">
-              My<span class="font-weight-regular text-uppercase font-normal">Weekly</span>
-            </span>
+        <v-toolbar-title>
+            <img class="brand-logo" src="/logo.png" alt="MyWEEKLY: The Latest in cutting-edge web technologies">
         </v-toolbar-title>
       </router-link>
 
@@ -23,7 +21,7 @@
       </div>
     </v-app-bar>
 
-    <v-content class="ma-4">
+    <v-content :class="{ 'ma-4': $route.meta.header !== 1 }">
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -57,5 +55,8 @@ export default {
 
 
 <style lang="scss" scoped>
-
+.brand-logo {
+	display: block;
+	width: 180px;
+}
 </style>

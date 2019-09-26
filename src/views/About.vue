@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <img src="https://placeholder.com">
+    <img src="/splash.png">
   </div>
 </template>
 
