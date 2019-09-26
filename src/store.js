@@ -36,13 +36,27 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    userLogin({ commit }, { email, password }) {
+    setAuthenticationStatePersistence({ commit, dispatch, state }, data) {
+      const { email, password } = data;
+      firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => firebase.auth().signInWithEmailAndPassword(email, password))
+        .catch((error) => {
+          this._vm.$toast.open({
+            message: error.message,
+            type: 'error',
+          });
+        });
+    },
+    userLogin({ commit, dispatch }, { email, password }) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((user) => {
           commit('SET_USER', user);
           commit('SET_IS_AUTHENTICATED', true);
+          dispatch('setAuthenticationStatePersistence', { email, password });
           router.push('/issues');
         })
         .catch((error) => {
@@ -54,13 +68,14 @@ export default new Vuex.Store({
           });
         });
     },
-    userJoin({ commit }, { email, password }) {
+    userJoin({ commit, dispatch }, { email, password }) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((user) => {
           commit('SET_USER', user);
           commit('SET_IS_AUTHENTICATED', true);
+          dispatch('setAuthenticationStatePersistence', { email, password });
           router.push('/issues');
         })
         .catch((error) => {
