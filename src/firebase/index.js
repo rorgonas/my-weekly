@@ -1,15 +1,16 @@
 import firebase from 'firebase';
+import env from './config';
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  databaseURL: process.env.DATABASE_URL,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.measurementId,
+  apiKey: env.CONFIG.VUE_APP_API_KEY,
+  authDomain: env.CONFIG.VUE_APP_AUTH_DOMAIN,
+  databaseURL: env.CONFIG.VUE_APP_DATABASE_URL,
+  projectId: env.CONFIG.VUE_APP_PROJECT_ID,
+  storageBucket: env.CONFIG.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: env.CONFIG.VUE_APP_MESSAGING_SENDER_ID,
+  appId: env.CONFIG.VUE_APP_APP_ID,
 };
 
 // Initialize Firebase

@@ -5,18 +5,28 @@
     <v-container class="my-5">
       <v-card flat>
         <v-card-text>
-          <v-form class="px-3" ref="form">
-            <v-text-field v-model="name" label="Name" :rules="inputRules"></v-text-field>
+          <v-form class="px-3" ref="form" v-model="valid">
             <v-text-field
+              prepend-icon="person"
+              v-model="email"
+              label="Email"
+              :rules="emailRules"
+              required
+            ></v-text-field>
+            <v-text-field
+              prepend-icon="lock"
               v-model="password"
-              :rules="inputRules"
+              :rules="passwordRules"
               type="password"
               label="Password"
               @click:append="show = !show"
+              required
             ></v-text-field>
           </v-form>
         </v-card-text>
         <v-card-actions class="justify-space-between">
+            Signup
+          </v-btn>
           <v-btn text router to="/login" class="ml-0 mt-0 text-capitalize">
             <span>You already have an account?</span>
           </v-btn>
@@ -32,16 +42,32 @@
 export default {
   data() {
     return {
-      name: "",
-      password: "",
+      valid: false,
+      email: '',
+      password: '',
       show: false,
-      inputRules: [
-        v => !!v || "This field is required",
-        v => v.length >= 3 || "Minimum length is 3 characters"
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
+      passwordRules: [
+        v => !!v || 'Password is required',
+        v => v.length >= 6
+          || 'Password must be greater than 6 characters',
       ],
       loading: false,
     };
-  }
+  },
+  methods: {
+    submit() {
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch('userJoin', {
+          email: this.email,
+          password: this.password,
+        });
+      }
+    },
+  },
 };
 </script>
 

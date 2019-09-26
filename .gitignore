@@ -1,4 +1,4 @@
-DS_Store
+.DS_Store
 node_modules
 /dist
 
@@ -28,3 +28,6 @@ yarn-error.log*
 /dist_electron
 
 .history/
+
+# Firebase config
+/src/firebase/config.js
