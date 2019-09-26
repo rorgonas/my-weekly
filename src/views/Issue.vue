@@ -14,8 +14,9 @@
           </div>
         </v-flex>
       </v-layout>
+
       <v-container class="my-5">
-      <v-card flat>
+      <v-card flat class="pl-2">
         <v-card-text>
           <v-form ref="form" v-model="valid">
             <v-layout>
@@ -61,21 +62,27 @@
       </v-card>
       </v-container>
     </div>
+
+
     <div v-else>
       <v-layout>
-        <v-flex xs12 md6>
-          <h1>Issue: {{ issue.title }}</h1>
+        <v-flex xs12>
+          <h1 class="subheading grey--text font-weight-light ml-5">{{ issue.title }} {{ issue.publishedDate}}</h1>
         </v-flex>
       </v-layout>
-      <v-container>
-        <article>
-          <h2>Articles</h2>
-          <v-list-item v-for="article in issue.articles" :key="article.id">
-            <v-list-item-content>
-             {{ article.title }} - {{ article.url }}
-            </v-list-item-content>
-          </v-list-item>
-        </article>
+
+      <v-container class="my-5">
+          <h2 class="grey--text font-weight-light">Articles</h2>
+		  <v-card flat class="pl-2">
+			  <v-list>
+				  <v-list-item v-for="article in issue.articles" :key="article.id">
+					<v-list-item-content>
+					{{ article.title }}<br>
+					{{ article.url }}
+					</v-list-item-content>
+				</v-list-item>
+			  </v-list>
+		  </v-card>
       </v-container>
     </div>
   </div>
@@ -98,7 +105,10 @@ export default {
       publishDate: null,
       dateRules: [v => !!v || 'Date is required'],
       issueNumber: 0,
-      issue: [],
+	  issue: [],
+	  cssArticles: [],
+	  jsArticles: [],
+	  miscArticles: []
     };
   },
   components: {
@@ -120,7 +130,8 @@ export default {
     },
   },
   mounted() {
-    this.issue = this.getSelectedIssue();
+	this.issue = this.getSelectedIssue();
+	console.log(this.issue.articles)
   },
   methods: {
     getSelectedIssue() {

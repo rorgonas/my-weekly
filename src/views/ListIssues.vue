@@ -1,11 +1,18 @@
 <template>
   <div class="list-issues">
-    <nav v-if="isAuthenticated" class="flex-row">
-      <v-btn text right class="ml-auto d-block" @click="onCreate">
-		  <v-icon>playlist_add</v-icon>
-        <span class="mr-2">Create New Issue</span>
-      </v-btn>
-    </nav>
+    <v-layout>
+		<v-flex xs12 md6>
+			<h1 class="subheading grey--text font-weight-light ml-5">Issues</h1>
+		</v-flex>
+		<v-flex xs12 md6 v-if="isAuthenticated">
+			<div class="flex-row">
+				<v-btn text right class="ml-auto d-block" @click="onCreate">
+					<v-icon>playlist_add</v-icon>
+					<span class="mr-2">Create New Issue</span>
+				</v-btn>
+			</div>
+		</v-flex>
+	</v-layout>
 
 	<v-container class="my-5">
 		<v-card flat class="pl-2">
@@ -65,6 +72,11 @@ export default {
       font-weight: 700;
       margin-left: 12px;
       color: #000;
+}
+.v-list-item__title {
+	a {
+		text-decoration: none;
+	}
   }
   .v-list-item__title {
     cursor: pointer;
