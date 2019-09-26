@@ -28,6 +28,9 @@ export default new Vuex.Store({
     ADD_ISSUE(state, payload) {
       state.issues.push(payload);
     },
+    SET_ISSUE(state, payload) {
+      state.issues = payload;
+    },
     CLEAR_ARTICLES(state) {
       state.articles = [];
     },
@@ -91,17 +94,12 @@ export default new Vuex.Store({
       commit('ADD_ARTICLE', data);
     },
     createIssue({ commit }, data) {
-      // Save to firebase()
+      const issue = `issue${data.number}`;
 
-      // db.collection('projects').add(project).then(() => {
-      //   this.loading = false;
-      //   this.dialog = false;
-      //   this.$emit('projectAdded');
-      // });
-
-      const issueName = data.name;
-      db.collection('issues').doc(issueName).set({
-        name: issueName,
+      db.collection('issues').doc(issue).set({
+        number: data.number,
+        title: data.title,
+        publishedDate: data.publishedDate,
         articles: data.articles,
       })
         .then(() => {
@@ -119,6 +117,19 @@ export default new Vuex.Store({
             type: 'success',
           });
         });
+    },
+    getIssues({ commit, state }) {
+      let items = [];
+      db.collection('issues').get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // commit('ADD_ISSUE', doc);
+          console.log(`${doc.id} => ${doc.data()}`);
+          items.push(doc.data());
+        });
+
+        commit('SET_ISSUE', items);
+        return items;
+      });
     },
   },
   getters: {

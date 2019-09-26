@@ -9,9 +9,11 @@
       </v-btn>
     </nav>
     <h1>Issues</h1>
-    <v-list-item v-for="issue in issueList" :key="issue.id">
+    <v-list-item v-for="issue in issues" :key="issue.id">
       <v-list-item-content>
-        <v-list-item-title v-text="issue.name"></v-list-item-title>
+        <v-list-item-title>
+          {{ issue.title }} {{ issue.publishedDate }}
+        </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
   </div>
@@ -19,24 +21,36 @@
 
 <script>
 import router from '@/router';
+
 export default {
-	computed: {
-		isAuthenticated() {
-			return this.$store.getters.isAuthenticated;
-		},
-		issueList(){
-			return this.$store.getters.getIssues;
-		}
-	},
-	methods: {
-		onCreate() {
-			// create new issue
-			router.push('/issue/0');
-		},
-		onEdit() {
-			// edit current issue
-		}
-	}
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+    issues() {
+      return this.$store.state.issues;
+    },
+  },
+  serverPrefetch() {
+    return this.getIssues();
+  },
+  mounted() {
+    const { issues } = this.$store.state;
+    if (issues.length === 0) {
+      this.getIssues();
+    }
+  },
+  methods: {
+    onCreate() {
+      router.push('/issue/0');
+    },
+    onEdit() {
+      // e@todo:
+    },
+    getIssues() {
+      return this.$store.dispatch('getIssues');
+    },
+  },
 };
 </script>
 

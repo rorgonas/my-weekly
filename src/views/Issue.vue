@@ -15,18 +15,13 @@
       </aside>
       <v-card-text>
         <v-form ref="form" v-model="valid">
-        <v-text-field
-          v-model="name"
-          label="Name*"
-          :rules="nameRules"
-          required
-        ></v-text-field>
+        <v-text-field v-model="name" label="WEEKLY READING LIST #1 September 23rd, 2019"></v-text-field>
         </v-form>
         </v-card-text>
       <article>
         <AddArticlePopup></AddArticlePopup>
         <h3>Articles</h3>
-        <v-list-item v-for="article in articleList"
+        <v-list-item v-for="article in getArticleList"
                      :key="article.id">
           <v-list-item-content>
             <v-list-item-title v-text="article.title"></v-list-item-title>
@@ -46,11 +41,7 @@ export default {
       valid: false,
       name: '',
       articles: [],
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length < 20
-            || 'Name should be less then 20 characters',
-      ],
+      issueNumber: 0,
     };
   },
   components: {
@@ -63,15 +54,24 @@ export default {
     isEditMode() {
       return !!(this.$route.params.id !== '0');
     },
-    articleList() {
+    getArticleList() {
       return this.$store.getters.getArticles;
     },
   },
   methods: {
+    setCurrentIssueNameNumber() {
+      const issues = this.$store.getters.getIssues.length;
+      const idx = issues + 1;
+      this.issueNumber = `#${idx}`;
+    },
     onCreate() {
+      // @todo: get publishedDate from Calendar widget
       if (this.$refs.form.validate()) {
+        this.setCurrentIssueNameNumber();
         this.$store.dispatch('createIssue', {
-          name: this.name,
+          number: this.issueNumber,
+          title: `WEEKLY READING LIST ${this.issueNumber}`,
+          publishedDate: 'September 19, 2019',
           articles: this.$store.getters.getArticles,
         });
       }
