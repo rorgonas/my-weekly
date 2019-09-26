@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
+    <v-app-bar app class="primary white--text">
       <v-toolbar-title class="headline" height="64">
           <span class="font-weight-light">
             My<span class="font-weight-regular text-uppercase font-normal">Weekly</span>
@@ -10,7 +10,7 @@
       <v-spacer></v-spacer>
 
       <v-btn text router to="/login">
-        <span class="mr-2">Login</span>
+        <span class="mr-2 white--text">Login</span>
       </v-btn>
     </v-app-bar>
 

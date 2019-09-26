@@ -16,12 +16,12 @@
             ></v-text-field>
           </v-form>
         </v-card-text>
-        <v-card-actions>
-          <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">Signup</v-btn>
-
+        <v-card-actions class="justify-space-between">
           <v-btn text router to="/login" class="ml-0 mt-0 text-capitalize">
             <span>You already have an account?</span>
           </v-btn>
+
+		  <v-btn text @click="submit" class="success ma-3 text-capitalize" :loading="loading">Signup</v-btn>
         </v-card-actions>
       </v-card>
     </v-container>
