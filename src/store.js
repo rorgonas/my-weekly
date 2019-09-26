@@ -9,6 +9,17 @@ export default new Vuex.Store({
   state: {
     user: null,
     isAuthenticated: false,
+    articles: [{
+      title: 'test',
+      url: 'sdfs'
+    },{
+      title: 'test',
+      url: 'sdfs'
+    },{
+      title: 'test',
+      url: 'sdfs'
+    }],
+    issues: []
   },
   mutations: {
     SET_USER(state, payload) {
@@ -17,6 +28,12 @@ export default new Vuex.Store({
     SET_IS_AUTHENTICATED(state, payload) {
       state.isAuthenticated = payload;
     },
+    ADD_ARTICLE(state, payload){
+      state.articles.push(payload);
+    },
+    ADD_ISSUE(state, payload) {
+      state.issues.push(payload);
+    }
   },
   actions: {
     userLogin({ commit }, { email, password }) {
@@ -26,7 +43,7 @@ export default new Vuex.Store({
         .then((user) => {
           commit('SET_USER', user);
           commit('SET_IS_AUTHENTICATED', true);
-          router.push('/');
+          router.push('/issues');
         })
         .catch((error) => {
           commit('SET_USER', null);
@@ -44,7 +61,7 @@ export default new Vuex.Store({
         .then((user) => {
           commit('SET_USER', user);
           commit('SET_IS_AUTHENTICATED', true);
-          router.push('/');
+          router.push('/issues');
         })
         .catch((error) => {
           commit('SET_USER', null);
@@ -62,7 +79,7 @@ export default new Vuex.Store({
         .then(() => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/login');
+          router.push('/');
         })
         .catch((error) => {
           commit('SET_USER', null);
@@ -73,10 +90,31 @@ export default new Vuex.Store({
           });
         });
     },
+    addArticle({ commit }, data){
+      commit('ADD_ARTICLE', data);
+    },
+    createIssue({ commit }, data){
+      // Save to firebase()
+
+      // db.collection('projects').add(project).then(() => {
+      //   this.loading = false;
+      //   this.dialog = false;
+      //   this.$emit('projectAdded');
+      // });
+
+      commit('ADD_ISSUE', data);
+      router.push('/issues');
+    },
   },
   getters: {
     isAuthenticated(state) {
       return state.user !== null && state.user !== undefined;
     },
+    getArticles(state) {
+      return state.articles;
+    },
+    getIssues(state) {
+      return state.issues;
+    }
   },
 });
