@@ -17,9 +17,9 @@
   "dependencies": {
     "chai-as-promised": "^7.1.1",
     "core-js": "^2.6.5",
-    "date-fns": "^2.3.0",
     "electron": "^6.0.0",
     "firebase": "^6.6.2",
+    "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vue-toast-notification": "0.0.3",

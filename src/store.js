@@ -113,7 +113,7 @@ export default new Vuex.Store({
 
       if (!state.isAuthenticated) {
         this._vm.$toast.open({
-          message: 'Your no longer logged in',
+          message: 'Login session expired. Please try to login again.',
           type: 'warning',
         });
         router.push('/login');
@@ -123,7 +123,7 @@ export default new Vuex.Store({
       db.collection('issues').doc(issue).set({
         number: data.number,
         title: data.title,
-        publishedDate: data.publishedDate,
+        publishDate: data.publishDate,
         articles: data.articles,
       })
         .then(() => {
@@ -148,7 +148,7 @@ export default new Vuex.Store({
       // prevent serverside action if not logged in
       if (!state.isAuthenticated) {
         this._vm.$toast.open({
-          message: 'Your no longer logged in',
+          message: 'Login session expired. Please try to login again.',
           type: 'warning',
         });
         router.push('/login');

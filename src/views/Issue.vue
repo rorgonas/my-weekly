@@ -82,8 +82,11 @@
 </template>
 
 <script>
-import format from 'date-fns/format';
+
 import AddArticlePopup from '@/components/AddArticlePopup';
+
+const moment = require('moment');
+
 
 export default {
   data() {
@@ -112,8 +115,8 @@ export default {
       return this.$store.getters.getArticles;
     },
     formattedDate() {
-      console.log(this.publishDate);
-      return this.publishDate ? format(this.publishDate, 'MMMM do YYYY') : '';
+      const date = this.publishDate ? this.publishDate : new Date();
+      return moment(date).format('MMMM Do YYYY');
     },
   },
   mounted() {
@@ -138,7 +141,7 @@ export default {
         this.$store.dispatch('createIssue', {
           number: this.issueNumber,
           title: `${this.issueNumber} WEEKLY READING LIST`,
-          publishedDate: 'September 19, 2019',
+          publishDate: this.formattedDate,
         });
       }
     },
