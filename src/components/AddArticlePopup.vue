@@ -23,7 +23,6 @@
                             v-model="selectedItem"
                             label="Select">
                   </v-select>
-                  {{ selectedItems }}
                 </v-col>
               </v-row>
             </v-container>
