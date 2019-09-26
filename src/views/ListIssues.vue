@@ -5,9 +5,6 @@
 		  <v-icon>playlist_add</v-icon>
         <span class="mr-2">Create New Issue</span>
       </v-btn>
-      <!-- <v-btn @click="onEdit">
-        <span class="mr-2">Edit</span>
-      </v-btn> -->
     </nav>
 
     <h1>Issues</h1>
@@ -45,9 +42,6 @@ export default {
   methods: {
     onCreate() {
       router.push('/issue/0');
-    },
-    onEdit() {
-      // e@todo:
     },
     getIssues() {
       return this.$store.dispatch('getIssues');

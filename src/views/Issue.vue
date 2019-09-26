@@ -13,9 +13,9 @@
 			</div>
 		</v-flex>
 	</v-layout>
-    
+
     <v-container class="my-5">
-      
+
       <v-card-text>
         <v-form ref="form" v-model="valid">
           <v-layout>
@@ -34,6 +34,8 @@
                     :value="publishDate"
                     label="Pick a Publish Date"
                     prepend-icon="event"
+                    :rules="dateRules"
+                    required
                     v-on="on"
                   ></v-text-field>
                 </template>
@@ -46,7 +48,7 @@
       <article>
         <AddArticlePopup></AddArticlePopup>
         <h2 class="grey--text font-weight-light">Articles</h2>
-        <v-list-item v-for="article in articleList" :key="article.id">
+        <v-list-item v-for="article in getArticleList" :key="article.id">
           <v-list-item-content>
             <v-list-item-title v-text="article.title"></v-list-item-title>
           </v-list-item-content>
@@ -57,38 +59,38 @@
 </template>
 
 <script>
-import format from "date-fns/format";
-import AddArticlePopup from "@/components/AddArticlePopup";
+import format from 'date-fns/format';
+import AddArticlePopup from '@/components/AddArticlePopup';
 
 export default {
   data() {
     return {
       valid: false,
-      name: "",
+      name: '',
       menu: false,
       articles: [],
       publishDate: null,
-      dateRules: [v => !!v || "Date is required"]
-issueNumber: 0,
+      dateRules: [v => !!v || 'Date is required'],
+      issueNumber: 0,
     };
   },
   components: {
-    AddArticlePopup
+    AddArticlePopup,
   },
   computed: {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
     isEditMode() {
-      return !!(this.$route.params.id !== "0");
+      return !!(this.$route.params.id !== '0');
     },
     getArticleList() {
       return this.$store.getters.getArticles;
     },
     formattedDate() {
       console.log(this.publishDate);
-      return this.publishDate ? format(this.publishDate, "MMMM do YYYY") : "";
-    }
+      return this.publishDate ? format(this.publishDate, 'MMMM do YYYY') : '';
+    },
   },
   methods: {
     setCurrentIssueNameNumber() {
@@ -99,15 +101,15 @@ issueNumber: 0,
     onCreate() {
       // @todo: get publishedDate from Calendar widget
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("createIssue", {
         this.setCurrentIssueNameNumber();
+        this.$store.dispatch('createIssue', {
           number: this.issueNumber,
           title: `WEEKLY READING LIST ${this.issueNumber}`,
           publishedDate: 'September 19, 2019',
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
