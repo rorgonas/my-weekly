@@ -69,6 +69,7 @@ export default {
       articles: [],
       publishDate: null,
       dateRules: [v => !!v || "Date is required"]
+issueNumber: 0,
     };
   },
   components: {
@@ -81,7 +82,7 @@ export default {
     isEditMode() {
       return !!(this.$route.params.id !== "0");
     },
-    articleList() {
+    getArticleList() {
       return this.$store.getters.getArticles;
     },
     formattedDate() {
@@ -90,11 +91,19 @@ export default {
     }
   },
   methods: {
+    setCurrentIssueNameNumber() {
+      const issues = this.$store.getters.getIssues.length;
+      const idx = issues + 1;
+      this.issueNumber = `#${idx}`;
+    },
     onCreate() {
+      // @todo: get publishedDate from Calendar widget
       if (this.$refs.form.validate()) {
         this.$store.dispatch("createIssue", {
-          name: this.name,
-          articles: this.$store.getters.getArticles
+        this.setCurrentIssueNameNumber();
+          number: this.issueNumber,
+          title: `WEEKLY READING LIST ${this.issueNumber}`,
+          publishedDate: 'September 19, 2019',
         });
       }
     }
