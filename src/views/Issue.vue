@@ -58,11 +58,13 @@
 			  </v-flex>
 		  </v-layout>
          
-          <v-list>
+          <v-list class="ml-2">
 			<v-list-item v-for="article in getArticles" :key="article.id">
 				<v-list-item-content>
 					<v-list-item-title>
-						<h4 class="font-weight-light ml-2">{{ article.title }}</h4> 
+						<strong class="grey--text">Title: </strong>  <strong>{{ article.title }}</strong><br>
+						<strong class="grey--text">URL: </strong> <strong>{{ article.url }}</strong><br>
+						<strong class="grey--text">Category: </strong> <strong>{{ readableCategory(article.category) }}</strong>
 					</v-list-item-title>
 				</v-list-item-content>
 				</v-list-item>
@@ -80,12 +82,12 @@
         </v-flex>
         <v-flex xs1>
           <v-btn @click="onExport('save')" title="Download">
-            <v-icon>save_alt</v-icon>
+            <v-icon flat>save_alt</v-icon>
           </v-btn>
         </v-flex>
         <v-flex xs1>
           <v-btn @click="onExport('open')" title="Export/Share">
-            <v-icon>picture_as_pdf</v-icon>
+            <v-icon flat>picture_as_pdf</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
