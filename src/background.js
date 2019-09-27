@@ -6,7 +6,7 @@ import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-buil
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const fs = require('fs');
 const path = require('path');
-const PDFWindow = require('electron-pdf-window');
+const nodemailer = require('nodemailer');
 
 // Hide extra native sub menu items
 systemPreferences.setUserDefault('NSDisabledDictationMenuItem', 'boolean', true);
@@ -165,6 +165,7 @@ app.on('ready', async () => {
   createWindow();
 });
 
+// Export to PDF
 ipcMain.on('print-to-pdf', (event, mode) => {
   const pdfPath = path.join(__dirname, '/reports/issue.pdf');
   const sender = BrowserWindow.fromWebContents(event.sender);
@@ -195,6 +196,33 @@ ipcMain.on('print-to-pdf', (event, mode) => {
         shell.openExternal(`file://${pdfPath}`);
       }
     });
+  });
+});
+
+// @todo: Send Email
+ipcMain.on('send-email', (event, user) => {
+  const { email, pass } = user;
+  const userEmail = 'rorgonas@gmail.com';
+
+  const transport = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user: email, pass },
+  });
+
+  // @todo: add PDF issue as attachment
+  const message = {
+    from: userEmail,
+    to: 'new.user@gmail.com',
+    subject: 'Message send from MyWeekly',
+    text: 'Welcome to MyWeekly',
+  };
+
+  transport.sendMail(message, (err) => {
+    if (err) {
+      console.log('Faild to sent email. \n', err);
+      return;
+    }
+    console.log('Email sent. \n');
   });
 });
 

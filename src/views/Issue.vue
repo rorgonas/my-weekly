@@ -79,6 +79,11 @@
             <v-icon>picture_as_pdf</v-icon>
           </v-btn>
         </v-flex>
+        <v-flex xs1>
+          <v-btn @click="onSendEmail" title="Send Email" disabled>
+            <v-icon>email</v-icon>
+          </v-btn>
+        </v-flex>
       </v-layout>
 
       <v-container class="my-5">
@@ -173,6 +178,9 @@ export default {
     },
     onExport(mode) {
       ipc.send('print-to-pdf', mode);
+    },
+    onSendEmail() {
+      // ipc.send('send-email', user);
     },
   },
 };

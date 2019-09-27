@@ -96,7 +96,7 @@ export default new Vuex.Store({
         .then(() => {
           commit('SET_USER', null);
           commit('SET_IS_AUTHENTICATED', false);
-          router.push('/');
+          router.push('/login');
         })
         .catch((error) => {
           commit('SET_USER', null);
