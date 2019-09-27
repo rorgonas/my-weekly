@@ -69,7 +69,14 @@ export default {
           url: this.url,
           category: this.selectedItem,
         });
+        this.clearData();
       }
+    },
+    clearData() {
+      this.title = '';
+      this.url = '';
+      this.selectedItem = [];
+      this.$refs.form.reset();
     },
   },
   computed: {
