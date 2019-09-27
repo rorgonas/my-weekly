@@ -199,33 +199,6 @@ ipcMain.on('print-to-pdf', (event, mode) => {
   });
 });
 
-// @todo: Send Email
-ipcMain.on('send-email', (event, user) => {
-  const { email, pass } = user;
-  const userEmail = 'rorgonas@gmail.com';
-
-  const transport = nodemailer.createTransport({
-    service: 'gmail',
-    auth: { user: email, pass },
-  });
-
-  // @todo: add PDF issue as attachment
-  const message = {
-    from: userEmail,
-    to: 'new.user@gmail.com',
-    subject: 'Message send from MyWeekly',
-    text: 'Welcome to MyWeekly',
-  };
-
-  transport.sendMail(message, (err) => {
-    if (err) {
-      console.log('Faild to sent email. \n', err);
-      return;
-    }
-    console.log('Email sent. \n');
-  });
-});
-
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
   if (process.platform === 'win32') {
