@@ -6,7 +6,6 @@ import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-buil
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const fs = require('fs');
 const path = require('path');
-const nodemailer = require('nodemailer');
 
 // Hide extra native sub menu items
 systemPreferences.setUserDefault('NSDisabledDictationMenuItem', 'boolean', true);
