@@ -114,10 +114,6 @@ export default new Vuex.Store({
       const issue = `issue${data.number}`;
 
       if (!state.isAuthenticated) {
-        this._vm.$toast.open({
-          message: 'Login session expired. Please try to login again.',
-          type: 'warning',
-        });
         router.push('/login');
         return;
       }
