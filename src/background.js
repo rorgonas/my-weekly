@@ -40,6 +40,13 @@ const mainMenuTemplate = [
     ],
   },
   {
+    label: 'Edit',
+    submenu: [
+      { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+      { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+    ],
+  },
+  {
     label: 'View',
     submenu: [
       {
