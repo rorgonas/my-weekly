@@ -1,9 +1,12 @@
 import {
-  app, protocol, BrowserWindow, Menu, systemPreferences,
+  app, protocol, BrowserWindow, Menu, systemPreferences, ipcMain, shell, remote,
 } from 'electron';
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const fs = require('fs');
+const path = require('path');
+const PDFWindow = require('electron-pdf-window');
 
 // Hide extra native sub menu items
 systemPreferences.setUserDefault('NSDisabledDictationMenuItem', 'boolean', true);
@@ -22,7 +25,7 @@ const mainMenuTemplate = [
         label: 'Issues List',
         accelerator: process.platform === 'darwin' ? 'Command+L' : 'Ctrl+L',
         click() {
-          win.loadURL(process.env.WEBPACK_DEV_SERVER_URL + '#/issues');
+          win.loadURL(`${process.env.WEBPACK_DEV_SERVER_URL}#/issues`);
         },
       },
       {
@@ -68,19 +71,19 @@ const mainMenuTemplate = [
       {
         label: 'Learn Electron',
         click() {
-          require('electron').shell.openExternal('http://electron.atom.io');
+          shell.openExternal('http://electron.atom.io');
         },
       },
       {
         label: 'VueJS Guide',
         click() {
-          require('electron').shell.openExternal('https://vuejs.org/v2/guide/');
+          shell.openExternal('https://vuejs.org/v2/guide/');
         },
       },
       {
         label: 'Vuetify Material Design Overview',
         click() {
-          require('electron').shell.openExternal('https://vuetifyjs.com/en/components/api-explorer');
+          shell.openExternal('https://vuetifyjs.com/en/components/api-explorer');
         },
       },
     ],
@@ -108,7 +111,7 @@ function createWindow() {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
     aboutWin.loadURL(`${process.env.WEBPACK_DEV_SERVER_URL}#/about`);
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
+    // if (!process.env.IS_TEST) win.webContents.openDevTools();
   } else {
     createProtocol('app');
     // Load the index.html when not in development
@@ -145,9 +148,6 @@ app.on('activate', () => {
   }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
@@ -163,6 +163,39 @@ app.on('ready', async () => {
     // }
   }
   createWindow();
+});
+
+ipcMain.on('print-to-pdf', (event, mode) => {
+  const pdfPath = path.join(__dirname, '/reports/issue.pdf');
+  const sender = BrowserWindow.fromWebContents(event.sender);
+
+  sender.webContents.printToPDF({ printBackground: true, landscape: true }, (error, data) => {
+    if (error) throw error;
+
+    // Save with a buffer as content from a base64 image
+    fs.writeFile(pdfPath, new Buffer(data, 'base64'), (err) => {
+      if (err) throw err;
+
+      // download PDF
+      if (mode === 'save') {
+        const test = new BrowserWindow({
+          width: 378,
+          height: 566,
+          show: true,
+          webPreferences: {
+            webSecurity: false,
+            plugins: true,
+          },
+        });
+        test.loadURL(`file://${__dirname}/reports/issue.pdf`);
+      }
+
+      // load PDF
+      if (mode === 'open') {
+        shell.openExternal(`file://${pdfPath}`);
+      }
+    });
+  });
 });
 
 // Exit cleanly on request from parent process in development mode.

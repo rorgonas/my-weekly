@@ -66,8 +66,18 @@
 
     <div v-else>
       <v-layout>
-        <v-flex xs12>
+        <v-flex xs10>
           <h1 class="subheading grey--text font-weight-light ml-5">{{ issue.title }} {{ issue.publishDate}}</h1>
+        </v-flex>
+        <v-flex xs1>
+          <v-btn @click="onExport('save')" title="Save as PDF">
+            <v-icon>save_alt</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex xs1>
+          <v-btn @click="onExport('open')" title="Open as PDF">
+            <v-icon>picture_as_pdf</v-icon>
+          </v-btn>
         </v-flex>
       </v-layout>
 
@@ -93,7 +103,7 @@
 import AddArticlePopup from '@/components/AddArticlePopup';
 
 const moment = require('moment');
-
+const ipc = require('electron').ipcRenderer;
 
 export default {
   data() {
@@ -160,6 +170,9 @@ export default {
           articles: this.articles,
         });
       }
+    },
+    onExport(mode) {
+      ipc.send('print-to-pdf', mode);
     },
   },
 };
