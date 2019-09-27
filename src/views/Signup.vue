@@ -71,4 +71,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.signup {
+	width: 600px;
+    margin: 08px auto 0;
+}
 </style>

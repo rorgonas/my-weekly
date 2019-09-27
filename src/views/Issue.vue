@@ -49,16 +49,25 @@
       </v-card>
 
       <v-card flat>
-        <AddArticlePopup />
-          <v-divider class="my-5"></v-divider>
-          <h2 class="grey--text font-weight-light">Articles</h2>
-          <v-list-item v-for="article in getArticles" :key="article.id">
-
-        <h2 class="grey--text font-weight-light">CSS/HTML</h2>
-            <v-list-item-content>
-              <v-list-item-title v-text="article.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+		  <v-layout>
+			  <v-flex xs12 md6>
+				  <h2 class="grey--text font-weight-light ml-5">Articles</h2>
+			  </v-flex>
+			  <v-flex xs12 md5>
+				  <AddArticlePopup />
+			  </v-flex>
+		  </v-layout>
+         
+          <v-list>
+			<v-list-item v-for="article in getArticles" :key="article.id">
+				<v-list-item-content>
+					<v-list-item-title>
+						<h4 class="font-weight-light ml-2">{{ article.title }}</h4> 
+					</v-list-item-title>
+				</v-list-item-content>
+				</v-list-item>
+		  </v-list>
+		 
       </v-card>
       </v-container>
     </div>
@@ -70,19 +79,18 @@
           <h1 class="subheading grey--text font-weight-light ml-5">{{ issue.title }} {{ issue.publishDate}}</h1>
         </v-flex>
         <v-flex xs1>
-          <v-btn @click="onExport('save')" title="Save as PDF">
+          <v-btn @click="onExport('save')" title="Download">
             <v-icon>save_alt</v-icon>
           </v-btn>
         </v-flex>
         <v-flex xs1>
-          <v-btn @click="onExport('open')" title="Open as PDF">
+          <v-btn @click="onExport('open')" title="Export/Share">
             <v-icon>picture_as_pdf</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
 
       <v-container class="my-5">
-          <h2 class="grey--text font-weight-light">Articles</h2>
 		  <v-card flat class="pl-2">
 			  <v-list>
 				  <v-list-item v-for="article in issue.articles" :key="article.id">

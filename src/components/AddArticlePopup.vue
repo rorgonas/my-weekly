@@ -1,8 +1,8 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="end">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on"><span class="mr-2">+ Add Article</span></v-btn>
+        <v-btn color="accent" class="btn-add" dark v-on="on"><span class="mr-2">+ Add Article</span></v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -84,3 +84,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.btn-add {
+	transform: translateX(40px);
+}
+</style>

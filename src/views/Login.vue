@@ -74,4 +74,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.login {
+	width: 600px;
+    margin: 08px auto 0;
+}
 </style>
