@@ -23,8 +23,11 @@
                 <span class="ml-1">{{ issue.title }}</span> <span class="publish-date">{{ issue.publishDate }}</span>
               </v-list-item-title>
             </v-list-item-content>
-            <v-list-item-icon @click="onSelectIssue(index)">
+            <v-list-item-icon @click="onSelectIssue(index)" title="Preview">
               <v-icon color="pink">remove_red_eye</v-icon>
+            </v-list-item-icon>
+            <v-list-item-icon @click="onDeleteIssue(index)" title="Delete">
+              <v-icon color="pink">delete_forever</v-icon>
             </v-list-item-icon>
           </v-list-item>
 			</v-list>
@@ -65,6 +68,9 @@ export default {
     onSelectIssue(id) {
       router.push(`/issue/${id}`);
     },
+    onDeleteIssue(id) {
+      return this.$store.dispatch('deleteIssues');
+    },
   },
 };
 </script>
@@ -76,14 +82,13 @@ export default {
       margin-left: 12px;
       color: #000;
 }
-.v-list-item__title {
-	a {
-		text-decoration: none;
-	}
+  .v-list-item__title {
+    a {
+      text-decoration: none;
+    }
   }
   .v-list-item__icon,
-  .v-list-item__title
-  {
+  v-list-item__title {
     cursor: pointer;
   }
 </style>
