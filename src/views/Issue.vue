@@ -57,7 +57,7 @@
 				  <AddArticlePopup />
 			  </v-flex>
 		  </v-layout>
-         
+
           <v-list class="ml-2">
 			<v-list-item v-for="article in getArticles" :key="article.id">
 				<v-list-item-content>
@@ -69,7 +69,7 @@
 				</v-list-item-content>
 				</v-list-item>
 		  </v-list>
-		 
+
       </v-card>
       </v-container>
     </div>
@@ -99,7 +99,7 @@
 					<v-list-item-content>
 					<h4 class="grey--text">{{ article.title }}</h4>
             		<a :href="article.url" target="_blank">{{ article.url }}</a><br>
-					<span class="pt-1">category: <strong>{{ readableCategory(article.category) }}</strong></span>	
+					<span class="pt-1">category: <strong>{{ readableCategory(article.category) }}</strong></span>
 					</v-list-item-content>
 				</v-list-item>
 			  </v-list>
@@ -151,7 +151,7 @@ export default {
     },
     isSaveBtnEnables() {
       return this.$store.getters.getSaveBtnStatus;
-	},
+    },
   },
   mounted() {
     if (!this.isEditMode) {
@@ -184,20 +184,20 @@ export default {
     },
     onExport(mode) {
       ipc.send('print-to-pdf', mode);
-	},
-	readableCategory(category) {
-		let cat = '';
+    },
+    readableCategory(category) {
+      let cat = '';
 
-		if(category === '1') {
-			cat = 'CSS/HTML';
-		} else if (category == '2') {
-			cat = 'JavaScript and Beyond';
-		} else {
-			cat = 'Misc.';
-		}
+      if (category === '1') {
+        cat = 'CSS/HTML';
+      } else if (category == '2') {
+        cat = 'JavaScript and Beyond';
+      } else {
+        cat = 'Misc.';
+      }
 
-		return cat;
-	},
+      return cat;
+    },
   },
 };
 </script>
