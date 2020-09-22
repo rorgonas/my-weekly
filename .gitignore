@@ -30,4 +30,4 @@ yarn-error.log*
 .history/
 
 # Firebase config
-/src/firebase/config.js
+src/firebase/config.js
